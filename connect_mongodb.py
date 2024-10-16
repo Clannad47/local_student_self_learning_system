@@ -17,6 +17,7 @@ logger.add(log_file_path,format="{time} | {level}     | {process}-{thread} |{fil
 
 class Mongodb:
     def __init__(self):
+        ##这里连接你本地或者云端的mongo数据库
         client = pymongo.MongoClient("mongodb://root:root@localhost:27017")
         db = client["user"]
         self.collection = db["user"]
@@ -73,8 +74,6 @@ class Mongodb:
 if __name__=='__main__':
     
     mongodb=Mongodb()
-
-
     ans=mongodb.Find('123')
     print(mongodb.FindAll())
 

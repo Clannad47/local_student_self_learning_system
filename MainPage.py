@@ -10,13 +10,10 @@ class MainPage:
 
     def create_page(self):
         self.change_frmae = ChangeFrame(self.root)
-        # tk.Label(self.change_frmae,text = '修改界面').pack()
         self.delete_frame = DeleteFrame(self.root)
-        # tk.Label(self.delete_frame, text='删除界面').pack()
         self.add_frame = AddFrame(self.root)
-        # tk.Label(self.add_frame, text='增添界面').pack()
         self.search_frame = SearchFrame(self.root)
-        # tk.Label(self.search_frame, text='查询界面').pack()
+
 
 
         menu = tk.Menu(self.root)

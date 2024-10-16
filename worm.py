@@ -1,4 +1,3 @@
-from functools import partial
 import threading
 from tkinter import *
 import tkinter as tk
@@ -20,10 +19,9 @@ class Worm:
 
         self.setup_frame0()
         self.setup_frame1()
-        # self.setup_frame2()
         
         
-        self.frame0.pack()  # Start with frame0
+        self.frame0.pack()  
 
     def setup_frame0(self):
         label0 = Label(self.frame0, text="CSDN每日热点", font=('华文行楷', 18))
@@ -68,24 +66,7 @@ class Worm:
         button2.grid(row=3, column=0, sticky=W)
 
         button3 = Button(self.frame1, text="返回", font=('微软雅黑', 15), command=self.go_back, relief=GROOVE)
-        button3.grid(row=3, column=1, sticky=E)
-
-    # def setup_frame2(self):
-    #     label2 = Label(self.frame2, text="请在下框输入你的问题", font=('华文行楷', 18))
-    #     label2.grid(columnspan=2)
-
-    #     self.entry1 = Entry(self.frame2, font=('微软雅黑', 14), width=52)
-    #     self.entry1.grid(row=1, columnspan=2)
-
-    #     button5 = Button(self.frame2, text='Chat', command=self.chat, font=('微软雅黑', 15))
-    #     button5.grid(row=3, column=0, sticky=W)
-
-    #     button6 = Button(self.frame2, text="返回", font=('微软雅黑', 15), command=self.go_back, relief=GROOVE)
-    #     button6.grid(row=3, column=1, sticky=E)
-
-    #     self.text2 = Text(self.frame2, font=('微软雅黑', 12), width=80, wrap=WORD, height=17)
-    #     self.text2.grid(row=2, columnspan=2)
-    
+        button3.grid(row=3, column=1, sticky=E)  
    
     def open_link(self, title):
         
@@ -118,7 +99,7 @@ class Worm:
     def frame_go1(self):
         #新开线程解决卡顿问题
         def run_streamlit():
-               start_aiweb = local[r"streamlit"][r"run", r"C:\Users\Clannad\Desktop\实训\学生自助学习系统\chatproject.py",r"--server.port=52025"]
+               start_aiweb = local[r"streamlit"][r"run", r".\chatproject.py",r"--server.port=52025"]
                start_aiweb()
         thread = threading.Thread(target = run_streamlit)
         thread.start()
@@ -135,8 +116,6 @@ class Worm:
         return messagebox.showinfo('您的每日一言',response.text)
 
  
-
-
 if __name__ == "__main__":
     root = tk.Tk()
     Worm(root)

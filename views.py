@@ -1,13 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-#from db import *
 from connect_mongodb import Mongodb
 db=Mongodb()
 class ChangeFrame(tk.Frame):
     def __init__(self,root):
         super().__init__(root)
-         # tk.Label(self, text='修改界面').pack()
         
         self.username = tk.StringVar()
         self.password = tk.StringVar()
@@ -49,7 +47,6 @@ class DeleteFrame(tk.Frame):
 
     def __init__(self,root):
         super().__init__(root)
-        # self.delete_frame = tk.Frame(self.root)
         tk.Label(self, text='删除界面').grid()
 
         self.username = tk.StringVar()
@@ -58,18 +55,13 @@ class DeleteFrame(tk.Frame):
         tk.Button(self,text='删除',command=self.delete).grid()
      
     def delete(self):
-        #db.qu()
         username = self.username.get()
-        # flag, message = db.delete_by_name(username)
         db.RemoveByName(username)
         messagebox.showwarning(title='提示',message='删除成功')
-        #db.cun()
 
 class AddFrame(tk.Frame):
     def __init__(self, root):
         super().__init__(root)
-        # self.add_frame = tk.Frame(self.root)
-        #tk.Label(self, text='增添界面').grid()
         self.username = tk.StringVar()
         self.password = tk.StringVar()
         self.create_page()
@@ -98,7 +90,6 @@ class AddFrame(tk.Frame):
 class SearchFrame(tk.Frame):
     def __init__(self, root):
          super().__init__(root)
-         # self.search_frame = tk.Frame(self.root)
          tk.Label(self, text='查询界面').grid()
          self.table_view = tk.Frame()
          self.table_view.grid()
@@ -123,8 +114,6 @@ class SearchFrame(tk.Frame):
         #删除旧的节点
         for item in self.tree_view.get_children():
             self.tree_view.delete(item)
-
- 
         users = db.FindAll()
         index = 0
         for u in users:

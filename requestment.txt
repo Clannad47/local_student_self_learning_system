@@ -1,0 +1,15 @@
+streamlit
+zhipuai
+pymongo
+loguru
+datetime
+requests
+parsel
+subprocess
+pdfkit
+tkinter
+threading
+plumbum
+webbrowser
+
+
