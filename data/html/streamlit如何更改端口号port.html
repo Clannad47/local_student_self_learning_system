@@ -1,0 +1,40 @@
+<!doctype html>
+ <html>
+ <head>
+     <meta charset = "UTF-8">
+     <title>Document</title>
+ </head>
+ <body>
+     <article class="baidu_pl">
+        <div id="article_content" class="article_content clearfix">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-704d5b9767.css">
+             
+                <div id="content_views" class="htmledit_views">
+                    <h3>使用场景</h3> 
+<p><span style="color:#1c7892;"><strong>可直接看文章末尾</strong></span></p> 
+<p>我在同一个节点部署多个python服务时，通过streamlit run app.py启动服务，会使用默认的port：8501；</p> 
+<p>但是多个服务，都是同样的ip，同样的port就会冲突；</p> 
+<p>所以需要不同的服务，需要设置不同的port；</p> 
+<p>而网上给的方法，都是根据官方文档来的，对这个场景并没什么用。</p> 
+<h3>解决方案</h3> 
+<h4>方案一</h4> 
+<p>思路：</p> 
+<p>1.端口号port既然是默认值8501，那找到这个数值，将其更改即可；</p> 
+<p>2.不同的服务，来自于不同的conda虚拟环境，在不同的虚拟环境更改port即可。</p> 
+<p>操作如下：</p> 
+<p>1.不同的项目创建不同的conda虚拟环境，在需要更改port的项目对应的虚拟环境下，找到config.py文件，路径：D:\Apps\miniconda3\envs\pytorch_gpu\Lib\site-packages\streamlit（D:\Apps\miniconda3是安装miniconda的路径）；</p> 
+<p><img alt="" height="685" src="https://i-blog.csdnimg.cn/blog_migrate/ab58ed4f9495ad78400d00a0f0ae87b5.png" width="1200"></p> 
+<p> 2.打开config.py文件，查找8501，将其改为想要设置的端口号即可；</p> 
+<p><img alt="" height="708" src="https://i-blog.csdnimg.cn/blog_migrate/86a9aad4a30f0326e35acad73b04547a.png" width="1200"></p> 
+<p> 3.保存改文件。</p> 
+<h3>方案二</h3> 
+<p>既然配置文件config.py里有相关的配置参数，也有相应的参数管理，在命令行也会有相应的设置。</p> 
+<p>通过启动命令 streamlit run app.py时，添加配置参数即可，下面9001为目标端口号，</p> 
+<p>比如 <strong>streamlit run app.py --server.port 9001</strong></p>
+                </div>
+        </div>
+        <div id="treeSkill"></div>
+    </article>
+ </body>
+ </html>

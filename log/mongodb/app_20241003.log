@@ -1,0 +1,2 @@
+2024-10-03T14:38:33.334642+0800 | INFO     | 30368-5808 |connect_mongodb.py:InsertOne:30 - 插入数据的 ID：66fe3be99a32b526512db0d9
+2024-10-03T14:38:33.334642+0800 | INFO     | 30368-5808 |connect_mongodb.py:InsertOne:31 - 插入的数据 ：InsertOneResult(ObjectId('66fe3be99a32b526512db0d9'), acknowledged=True)

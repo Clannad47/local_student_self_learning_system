@@ -1,0 +1,4 @@
+2024-10-05T14:37:33.143913+0800 | INFO     | 37344-13712 |connect_mongodb.py:InsertOne:30 - 插入数据的 ID：6700deadd7a400370e71b27e
+2024-10-05T14:37:33.144927+0800 | INFO     | 37344-13712 |connect_mongodb.py:InsertOne:31 - 插入的数据 ：InsertOneResult(ObjectId('6700deadd7a400370e71b27e'), acknowledged=True)
+2024-10-05T14:42:54.713647+0800 | INFO     | 37344-13712 |connect_mongodb.py:UpdateByName:56 - 更新文档： UpdateResult({'n': 1, 'nModified': 1, 'ok': 1.0, 'updatedExisting': True}, acknowledged=True)
+2024-10-05T14:43:07.687854+0800 | INFO     | 37344-13712 |connect_mongodb.py:UpdateByName:56 - 更新文档： UpdateResult({'n': 1, 'nModified': 1, 'ok': 1.0, 'updatedExisting': True}, acknowledged=True)

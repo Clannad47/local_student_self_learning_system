@@ -1,0 +1,26 @@
+<!doctype html>
+ <html>
+ <head>
+     <meta charset = "UTF-8">
+     <title>Document</title>
+ </head>
+ <body>
+     <article class="baidu_pl">
+        <div id="article_content" class="article_content clearfix">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-704d5b9767.css">
+             
+                <div id="content_views" class="htmledit_views">
+                    <p>我是Python小白 完全不知道该如何去运行 但是看到别人的爬虫代码就很开心激动和羡慕</p> 
+<p>于是我就捉摸着自学与研究 我的电脑是 win10 64位的 安装的是Python3.5</p> 
+<p>环境变量就是把安装的路径添加到环境变量即可,不会可以搜.网上写的都比我的好.所以就不赘述了</p> 
+<p>先贴代码,是爬去网易云音乐的热评.</p> 
+<p>import re<br> import requests<br> import json<br> <br> <br> def get_all_hotsongs():<br>     """抓热搜榜所有歌曲"""<br>     url = 'http://music.163.com/discover/toplist?id=3778678'<br>     headers = {
+ <!-- --><br>         'Cookie':'__e_=1515461191756; _ntes_nnid=af802a7dd2cafc9fef605185da6e73fb,1515461190617; _ntes_nuid=af802a7dd2cafc9fef605185da6e73fb; JSESSIONID-WYYY=HMyeRdf98eDm%2Bi%5CRnK9iB%5ChcSODhA%2Bh4jx5t3z20hhwTRsOCWhBS5Cpn%2B5j%5CVfMIu0i4bQY9sky%5CsvMmHhuwud2cDNbFRD%2FHhWHE61VhovnFrKWXfDAp%5CqO%2B6cEc%2B%2BIXGz83mwrGS78Goo%2BWgsyJb37Oaqr0IehSp288xn5DhgC3Cobe%3A1515585307035; _iuqxldmzr_=32; __utma=94650624.61181594.1515583507.1515583507.1515583507.1; __utmc=94650624; __utmz=94650624.1515583507.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none); __utmb=94650624.4.10.1515583507',<br>         'Host':'music.163.com',<br>         'Refere':'http://music.163.com/',<br>         'Upgrade-Insecure-Requests':'1',<br>         'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'<br>     }<br>     r = requests.get(url,headers=headers)<br> <br> <br>     #使用正则表达式匹配正文响应<br>     reg1 = r'&lt;ul class="f-hide"&gt;&lt;li&gt;&lt;a href="/song\?id=\d*?"&gt;.*&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;'<br>     result_contain_songs_ul = re.compile(reg1).findall(r.text)<br>     result_contain_songs_ul = result_contain_songs_ul[0]<br> <br> <br>     reg2 = r'&lt;li&gt;&lt;a href="/song\?id=\d*?"&gt;(.*?)&lt;/a&gt;&lt;/li&gt;'<br>     reg3 = r'&lt;li&gt;&lt;a href="/song\?id=(\d*?)"&gt;.*?&lt;/a&gt;&lt;/li&gt;'<br>     hot_songs_name = re.compile(reg2).findall(result_contain_songs_ul)<br>     hot_songs_id = re.compile(reg3).findall(result_contain_songs_ul)<br> <br> <br>     #返回歌曲名 歌曲id<br>     return hot_songs_name,hot_songs_id<br> <br> <br> def get_hotcommnets(hot_songs_name,hot_songs_id):<br>     """抓热搜榜歌曲热评"""<br>     url = 'http://music.163.com/weapi/v1/resource/comments/R_SO_4_'+hot_songs_id+'?csrf_token='<br>     headers = {
+ <!-- --><br>         'Host':'music.163.com',<br>         'Proxy-Connection':'keep-alive',</p>
+                </div>
+        </div>
+        <div id="treeSkill"></div>
+    </article>
+ </body>
+ </html>
