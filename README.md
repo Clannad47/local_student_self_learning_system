@@ -23,7 +23,7 @@
 
         4.   aichat功能：和专门调试过的ai老师小小鑫进行对话，小小鑫老师会解答有关于学习或者生活中的问题。
 
-3.2项目设计
+项目设计
 
     下图（图1）为登录的流程图，将管理员和普通用户做区分，管理员进入用户管理系统（UserManagement System）而普通用户则进入学生自助学习系统(Student Self Help
 Learning System )中。
