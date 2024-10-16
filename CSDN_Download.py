@@ -1,3 +1,4 @@
+import os
 import subprocess
 import requests
 import parsel
@@ -33,7 +34,11 @@ def get_html(url):
     myconfig = pdfkit.configuration(wkhtmltopdf="D:/software/wkhtmltopdf/bin/wkhtmltopdf.exe")
     file_name = f'./data/pdf/{title}.pdf'
     html_name=f'./data/html/{title}.html'
-    #pdb.set_trace()
+    if not os.path.exists(f'./data/pdf/'):
+        os.makedirs(f'./data/pdf/')
+    if not os.path.exists(f'./data/html/'):
+        os.makedirs(f'./data/html/')
+    
     with open(html_name, mode = 'w', encoding = 'utf-8') as f:
          f.write(html.format(content = articel))
          f.close()
@@ -43,7 +48,7 @@ def get_html(url):
         subprocess.Popen(['start', '', file_name], shell = True)
         return True
     except:
-        print("title内含有非法字符不能作为文件名保存")
+        print(f"{title}内含有非法字符不能作为文件名保存")
         return False
 
 

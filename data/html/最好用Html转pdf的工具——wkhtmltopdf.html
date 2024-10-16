@@ -1,0 +1,177 @@
+<!doctype html>
+ <html>
+ <head>
+     <meta charset = "UTF-8">
+     <title>Document</title>
+ </head>
+ <body>
+     <article class="baidu_pl">
+        <div id="article_content" class="article_content clearfix">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/kdoc_html_views-1a98987dfd.css">
+        <link rel="stylesheet" href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/ck_htmledit_views-704d5b9767.css">
+             
+                <div id="content_views" class="markdown_views prism-atom-one-light">
+                    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                    </svg>
+                    <p>实习时公司需要把一些html页面中的部分内容生成pdf文件，然后我就找一些用php把html页面围成pdf文件的类。方法是可谓是找了很多很多，什么html2pdf,pdflib,FPDF这些都试过了，但是都没有达到我要的求（主要是不能解决中文乱码的问题以及样式排版的问题）。</p> 
+<p>pdflib,FPDF 这两个方法是需要编写程序去生成pdf的，就也是讲不支持直接把html页面转换成pdf；html2pdf这个虽然可以把html页面转换成pdf文 件，但是它只能转换一般简单的html代码，如果你的html内容要的是通过后台新闻编辑器排版的那肯定不行的。</p> 
+<p>纠结了半天，什么百度，谷歌搜索都用了，搜索了半天，功夫不负有心人，终于找到一个非常好用的方法了，下面就隆重介绍。</p> 
+<p>它就 是：wkhtmltopdf，wkhtmltopdf可以直接把任何一个可以在浏览器中浏览的网页直接转换成一个pdf，首先说明一下它不是一个php 类，而是一个把html页面转换成pdf的一个软件（需要安装在服务器上），但是它并不是一个简单的桌面软件，而且它直接cmd批处理的，使用php中的 shell_exec()函数就可以调用它。下面就介绍如何用php+js+html来让它生成pdf文件的方法（不过有个缺陷就是他需要在服务器端生成一个缓存文件，如果你使用thinkphp框架的话就可以将其缓存文件放在runtime 文件夹中暂存就行）。</p> 
+<p>一，下载并安装wkhtmltopdf <br> 1、下载地址：<a href="http://wkhtmltopdf.org/downloads.html" rel="nofollow">http://wkhtmltopdf.org/downloads.html</a> 如图： <br> <img src="https://img-blog.csdn.net/20160513102255424" alt="这里写图片描述" title=""> <br> 2、上面有各种平台下安装的安装包，英文不好的直接谷歌翻译一下。下面以 windows7平台上使用举例，我的下载的是stable(稳定版)的wkhtmltopdf-0.12.3.2-installer.exe这个版本，我在win7、win8 32位和64位以及win-sever上安装测试都没有问题的，系统时几位就下载几位的安装包。下载好以后直接安装就可以了，注意安装路径要知道，下面会用到的。 <br> <img src="https://img-blog.csdn.net/20160513102514159" alt="这里写图片描述" title=""> <br> 3、安装好以后需要在系统环境变量变量名为”Path”的后添加：;D:\wkhtmltopdf\bin 也就是你安装的目录。安装好以后重启电脑。 <br> 下图是如何设置环境变量：</p> 
+<p>打开我的电脑右键属性</p> 
+<p><img src="https://img-blog.csdn.net/20160513103330897" alt="打开我的电脑右键属性" title=""></p> 
+<p>点击高级系统设置</p> 
+<p><img src="https://img-blog.csdn.net/20160513103349757" alt="点击高级系统设置" title=""></p> 
+<p>找到高级里面点击环境变量</p> 
+<p><img src="https://img-blog.csdn.net/20160513103410851" alt="找到高级里面点击环境变量" title=""></p> 
+<p>找到系统变量中的path，点击编辑，将刚刚的安装位置复制到最后，记得前面加一个分号哦！</p> 
+<p><img src="https://img-blog.csdn.net/20160513103517649" alt="找到系统变量中的path，点击编辑，将刚刚的安装位置复制到最后，记得前面加一个分号哦！" title=""> <br> <img src="https://img-blog.csdn.net/20160513103712038" alt="这里写图片描述" title=""></p> 
+<p>二，测试使用效果 <br> 直接在cmd里输入：wkhtmltopdf <a href="http://www.baidu.com/" rel="nofollow">http://www.baidu.com/</a> D:website1.pdf(注意中间有空格哈) <br> 第一个是：运行软件名称（这个是不变的） 第二个是网址 第三个是生成后的路径及文件名。回车后是不是看生一个生成进度条的提示呢，恭喜您已经成功了，到你的生成目录里看看是不是有一个刚生成的pdf文件呢。 <br> 操作方法：1、windows键+r打开搜索框，输入cmd,点击确定</p> 
+<p><img src="https://img-blog.csdn.net/20160513103909945" alt="这里写图片描述" title=""></p> 
+<p>2、直接在cmd里输入：wkhtmltopdf <a href="http://www.baidu.com/" rel="nofollow">http://www.baidu.com/</a> D:website1.pdf(注意中间有空格哈)</p> 
+<p><img src="https://img-blog.csdn.net/20160513104444959" alt="这里写图片描述" title=""></p> 
+<p>3、点击回车后，会看到一个进度条，然后就提示转换成功！</p> 
+<p><img src="https://img-blog.csdn.net/20160513104526975" alt="这里写图片描述" title=""></p> 
+<p>4、之后在相应位置（即刚刚设置的D盘）中会发现多了一个Pdf文件，就说明成功了</p> 
+<p><img src="https://img-blog.csdn.net/20160513104703198" alt="这里写图片描述" title=""></p> 
+<p>三，php里调用 <br> php里调用是很简单的，用shell_exec这个函数就可以了，如果shell_exec函数不能用看看php.ini里是否补禁用了（找到php.ini中的shell_exec函数，取消注释就可以了，一般都是可以直接用的）。简单举例：</p> 
+<pre class="prettyprint"><code class=" hljs handlebars"><span class="xml"><span class="php"><span class="hljs-preprocessor">&lt;?php</span> shell_exec(<span class="hljs-string">"wkhtmltopdf http://www.shwzzz.cn/ 1.pdf"</span>) <span class="hljs-preprocessor">?&gt;</span></span></span></code></pre> 
+<p>你会发现在你php文件的同级目录中会生成一个1.pdf的文件</p> 
+<p>下面代码举例介绍如何在网站开发中使用它：主要功能是截取网页的部分传递到php中处理成pdf文档 <br> html页面代码：</p> 
+<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-doctype">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span> <span class="hljs-attribute">xmlns</span>=<span class="hljs-value">"http://www.w3.org/1999/xhtml"</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"js/jquery-2.1.4.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"css/common.css"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"css/myCenter.css"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">http-equiv</span>=<span class="hljs-value">"Content-Type"</span> <span class="hljs-attribute">content</span>=<span class="hljs-value">"text/html; charset=utf-8"</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>霍兰德职业测试<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+<span class="hljs-comment">&lt;!--startprint--&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"right5"</span>&gt;</span> 
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"right_top"</span>  <span class="hljs-attribute">style</span>=<span class="hljs-value">"background-image:url(images/right-di.png);"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>霍兰德测试报告<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"print"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"button"</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"下载报告"</span>  <span class="hljs-attribute">id</span>=<span class="hljs-value">"down"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"print_btn"</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span> 
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Hollander"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">h6</span>&gt;</span>MBTI测试结果：ESTJ<span class="hljs-tag">&lt;/<span class="hljs-title">h6</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"chart"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>约翰·霍兰德（John Holland）是美国约翰·霍普金斯大学心理学教授，美国著名的职业指导专家。霍兰德以职业兴趣理论为基础，先后编制了职业偏好量表(VocatIonaI Preference lnventory)和自我导向搜寻表(Self-directed Search)两种职业兴趣量表，霍兰德力求为每种职业兴趣找出两种相匹配的职业能力。兴趣测试和能力测试的结合在职业指导和职业咨询的实际操作中起到了促进作用。<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>   
+        <span class="hljs-tag">&lt;<span class="hljs-title">table</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl1"</span>&gt;</span>
+         <span class="hljs-tag">&lt;<span class="hljs-title">tbody</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">node-type</span>=<span class="hljs-value">"toolBar"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl11"</span>&gt;</span>领导模式:<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl12"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>①直接领导，快速管理 ②运用过去经验解决问题 ③直接、明确地识别问题的核心 ④决策和执行决策非常迅速 ⑤传统型领导，尊重组织内部的等级和组织获得的成就<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">node-type</span>=<span class="hljs-value">"toolBar"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl11"</span>&gt;</span>领导模式:<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl12"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>①直接领导，快速管理 ②运用过去经验解决问题 ③直接、明确地识别问题的核心 ④决策和执行决策非常迅速 ⑤传统型领导，尊重组织内部的等级和组织获得的成就<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">node-type</span>=<span class="hljs-value">"toolBar"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl11"</span>&gt;</span>领导模式:<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl12"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>①直接领导，快速管理 ②运用过去经验解决问题 ③直接、明确地识别问题的核心 ④决策和执行决策非常迅速 ⑤传统型领导，尊重组织内部的等级和组织获得的成就<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">node-type</span>=<span class="hljs-value">"toolBar"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl11"</span>&gt;</span>领导模式:<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl12"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>①直接领导，快速管理 ②运用过去经验解决问题 ③直接、明确地识别问题的核心 ④决策和执行决策非常迅速 ⑤传统型领导，尊重组织内部的等级和组织获得的成就<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">node-type</span>=<span class="hljs-value">"toolBar"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl11"</span>&gt;</span>适合报考专业:<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"tbl12"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">span</span>&gt;</span>专业定位卡介绍&gt;&gt;<span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+       <span class="hljs-tag">&lt;/<span class="hljs-title">tbody</span>&gt;</span>
+     <span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span>    
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-comment">&lt;!--endprint--&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">action</span>=<span class="hljs-value">"pdf.php"</span> <span class="hljs-attribute">method</span>=<span class="hljs-value">"post"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"hld_res"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"hideform"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"hidden"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"hide_content"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"html"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>  
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
+    $(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> {<!-- --></span>
+      <span class="hljs-comment">//获取需要传递的Html代码 通过&lt;!--startprint--&gt;&lt;!--endprint--&gt;截取</span>
+      bdhtml=window.document.body.innerHTML; 
+      sprnstr=<span class="hljs-string">"&lt;!--startprint--&gt;"</span>; 
+      eprnstr=<span class="hljs-string">"&lt;!--endprint--&gt;"</span>; 
+      prnhtml=bdhtml.substr(bdhtml.indexOf(sprnstr)+<span class="hljs-number">17</span>); 
+      prnhtml=prnhtml.substring(<span class="hljs-number">0</span>,prnhtml.indexOf(eprnstr)); 
+      <span class="hljs-comment">//将获取的html代码添加到隐藏域中传给php文件处理</span>
+      $(<span class="hljs-string">"#hide_content"</span>).val(<span class="hljs-string">""</span>+prnhtml+<span class="hljs-string">""</span>);
+    } );   
+
+    $(<span class="hljs-string">"#down"</span>).click(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span>{<!-- --></span>
+      $(<span class="hljs-string">"#hideform"</span>).submit();
+    }); 
+
+  </span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span></code></pre> 
+<p>php页面：</p> 
+<pre class="prettyprint"><code class=" hljs bash">&lt;?php
+    //转成pdf
+        <span class="hljs-variable">$html</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">'html'</span>];
+        //Turn on output buffering
+        ob_start();
+        <span class="hljs-variable">$html</span>=<span class="hljs-string">'
+        &lt;link rel="stylesheet" href="css/common.css"&gt;
+        &lt;link rel="stylesheet" href="css/myCenter.css"&gt;
+        &lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" /&gt;'</span>.<span class="hljs-variable">$html</span>;
+        //这儿可以引入生成的Html的样式表  路径可以是绝对路径也可以是相对路径，也可以把样式表文件复制到临时html文件的目录下 即这儿的demo文件目录下（默认） 也可以直接把样式写在html页面中直接传递过来
+        //<span class="hljs-variable">$html</span> = ob_get_contents();
+        //<span class="hljs-variable">$html</span>=<span class="hljs-variable">$html1</span>.<span class="hljs-variable">$html</span>;
+        <span class="hljs-variable">$filename</span> = <span class="hljs-string">"hld"</span>;
+
+        //save the html page <span class="hljs-keyword">in</span> tmp folder  保存的html临时文件位置 可以是相对路径也是可以是绝对路径 下面用相对路径
+        file_put_contents(<span class="hljs-string">"{<!-- --><span class="hljs-variable">$filename</span>}.html"</span>, <span class="hljs-variable">$html</span>);
+
+        //Clean the output buffer and turn off output buffering
+        ob_end_clean();
+
+        //convert HTML to PDF
+        shell_<span class="hljs-keyword">exec</span>(<span class="hljs-string">"wkhtmltopdf -q {<!-- --><span class="hljs-variable">$filename</span>}.html {<!-- --><span class="hljs-variable">$filename</span>}.pdf"</span>);
+        <span class="hljs-keyword">if</span>(file_exists(<span class="hljs-string">"{<!-- --><span class="hljs-variable">$filename</span>}.pdf"</span>)){
+            header(<span class="hljs-string">"Content-type:application/pdf"</span>);
+            header(<span class="hljs-string">"Content-Disposition:attachment;filename={<!-- --><span class="hljs-variable">$filename</span>}.pdf"</span>);
+            <span class="hljs-built_in">echo</span> file_get_contents(<span class="hljs-string">"{<!-- --><span class="hljs-variable">$filename</span>}.pdf"</span>);
+            //<span class="hljs-built_in">echo</span> <span class="hljs-string">"{<!-- --><span class="hljs-variable">$filename</span>}.pdf"</span>;
+        }<span class="hljs-keyword">else</span>{
+            <span class="hljs-keyword">exit</span>;
+        }
+     ?&gt;</code></pre> 
+<p>点击页面中的下载按钮，</p> 
+<p><img src="https://img-blog.csdn.net/20160513113303820" alt="这里写图片描述" title=""></p> 
+<p>是不是弹出一个下载提示，打开下载的pdf,是不是和网页上的样式一模一样呢，</p> 
+<p><img src="https://img-blog.csdn.net/20160513113320686" alt="这里写图片描述" title=""> <br> <img src="https://img-blog.csdn.net/20160513113335983" alt="这里写图片描述" title=""></p> 
+<p>再打开Php文件中的文件保存位置，看看是不是多了两个临时文件呢？ <br> 这两个临时文件在哪儿，你的css就得在哪儿，或者你直接使用相对路径，引用其他文件中的css样式也可以的，最简单的就是把css样式直接写在要转成pdf的html页面中。 <br> <img src="https://img-blog.csdn.net/20160513113417494" alt="这里写图片描述" title=""></p> 
+<p>如果存在样式没有，那就是你的样式路径没有写对，在检查一下就可以了！</p> 
+<p>四，解决分页问题 <br> wkhtmltopdf 很好用，但也有些不尽人意。就是当一个html页面很长我需要在指定的地方分页那怎么办呢？ wkhtmltopdf 开发者在开发的时候并不是没有考虑到这一点， <br> wkhtmltopdf 有个很好的方法，就是在那个div的样式后添加一个：page-break-inside:avoid;就ok了。 <br> 例如</p> 
+<pre class="prettyprint"><code class=" hljs css"><span class="hljs-tag">div</span><span class="hljs-rules">{ <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"><span class="hljs-number">800</span>px</span></span>; <span class="hljs-rule"><span class="hljs-attribute">min-height</span>:<span class="hljs-value"><span class="hljs-number">1362</span>px</span></span>;<span class="hljs-rule"><span class="hljs-attribute">margin</span>:<span class="hljs-value">auto</span></span>;<span class="hljs-rule"><span class="hljs-attribute">page-break-inside</span>:<span class="hljs-value">avoid</span></span>;<span class="hljs-rule">}</span></span></code></pre> 
+<p>以上就是个人总结的转pdf的方法，很多地方还可以扩展，小伙伴们开动脑筋动起来吧，不过目前一直没有解决就是没法用中文名称命名文件，如果有能解决的伙伴，麻烦在下面留言告知，谢谢么么哒了！</p>
+                </div>
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/editerView/markdown_views-f23dff6052.css" rel="stylesheet">
+                <link href="https://csdnimg.cn/release/blogv2/dist/mdeditor/css/style-e504d6a974.css" rel="stylesheet">
+        </div>
+        <div id="treeSkill"></div>
+    </article>
+ </body>
+ </html>
